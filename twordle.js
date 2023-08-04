@@ -39,30 +39,35 @@ function guessWord() {
             posOne = userGuess.charAt(0);
             matches++;
             first.textContent = posOne;
+            document.getElementById("one").style.backgroundColor = "lime";
             console.log(posOne);
             letterCheck()
         } else if (userGuess.charAt(1) == dailyWord.charAt(1) && posTwo == "") {
             posTwo = userGuess.charAt(1);
             matches++;
             second.textContent = posTwo;
+            document.getElementById("two").style.backgroundColor = "lime";
             console.log(posTwo);
             letterCheck()
         } else if (userGuess.charAt(2) == dailyWord.charAt(2) && posThree == "") {
             posThree = userGuess.charAt(2);
             matches++;
             third.textContent = posThree;
+            document.getElementById("three").style.backgroundColor = "lime";
             console.log(posThree);
             letterCheck()
         } else if (userGuess.charAt(3) == dailyWord.charAt(3) && posFour == "") {
             posFour = userGuess.charAt(3);
             matches++;
             fourth.textContent = posFour;
+            document.getElementById("four").style.backgroundColor = "lime";
             console.log(posFour);
             letterCheck()
         } else if (userGuess.charAt(4) == dailyWord.charAt(4) && posFive == "") {
             posFive = userGuess.charAt(4);
             matches++;
             fifth.textContent = posFive;
+            document.getElementById("five").style.backgroundColor = "lime";
             console.log(posFive);
             letterCheck()
         } else {

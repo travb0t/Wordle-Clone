@@ -6,6 +6,27 @@ body {
     gap: 20px;
 }
 
+.lettersRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.box {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+}
+
+p {
+    font-size: medium;
+    color: black;
+}
+
 button {
     padding: 5px 10px;
 }

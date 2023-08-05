@@ -32,6 +32,12 @@ function guessWord() {
     let posFour = "";
     let posFive = "";
 
+    let closeOne = "";
+    let closeTwo = "";
+    let closeThree = "";
+    let closeFour = "";
+    let closeFive = "";
+
     let matches = 0;
     let closeMatches = 0;
 
@@ -55,6 +61,7 @@ function guessWord() {
 
         if (userOne == dailyOne && posOne == "") {
             posOne = userOne;
+            dailyOne = "";
             matches++;
             first.textContent = posOne;
             document.getElementById("one").style.backgroundColor = "lime";
@@ -62,6 +69,7 @@ function guessWord() {
             letterCheck()
         } else if (userTwo == dailyTwo && posTwo == "") {
             posTwo = userTwo;
+            dailyTwo = "";
             matches++;
             second.textContent = posTwo;
             document.getElementById("two").style.backgroundColor = "lime";
@@ -69,6 +77,7 @@ function guessWord() {
             letterCheck()
         } else if (userThree == dailyThree && posThree == "") {
             posThree = userThree;
+            dailyThree = "";
             matches++;
             third.textContent = posThree;
             document.getElementById("three").style.backgroundColor = "lime";
@@ -76,6 +85,7 @@ function guessWord() {
             letterCheck()
         } else if (userFour == dailyFour && posFour == "") {
             posFour = userFour;
+            dailyFour = "";
             matches++;
             fourth.textContent = posFour;
             document.getElementById("four").style.backgroundColor = "lime";
@@ -83,6 +93,7 @@ function guessWord() {
             letterCheck()
         } else if (userFive == dailyFive && posFive == "") {
             posFive = userFive;
+            dailyFive = "";
             matches++;
             fifth.textContent = posFive;
             document.getElementById("five").style.backgroundColor = "lime";
@@ -95,42 +106,133 @@ function guessWord() {
 
     function closeMatchCheck() {
 
-        if (posOne == "" && userOne == dailyTwo || posOne == "" && userOne == dailyThree || posOne == "" && userOne == dailyFour || posOne == "" && userOne == dailyFive) {
-            posOne = userOne;
-            closeMatches++;
-            first.textContent = posOne;
-            document.getElementById("one").style.backgroundColor = "orange";
-            console.log(posOne);
-            closeMatchCheck()
-        } else if (posTwo == "" && userTwo == dailyTwo || posTwo == "" && userTwo == dailyThree || posTwo == "" && userTwo == dailyFour || posTwo == "" && userTwo == dailyFive) {
-            posTwo = userTwo;
-            closeMatches++;
-            second.textContent = posTwo;
-            document.getElementById("two").style.backgroundColor = "orange";
-            console.log(posTwo);
-            closeMatchCheck()
-        } else if (posThree == "" && userThree == dailyTwo || posThree == "" && userThree == dailyThree || posThree == "" && userThree == dailyFour || posThree == "" && userThree == dailyFive) {
-            posThree = userThree;
-            closeMatches++;
-            third.textContent = posThree;
-            document.getElementById("three").style.backgroundColor = "orange";
-            console.log(posThree);
-            closeMatchCheck()
-        } else if (posFour == "" && userFour == dailyTwo || posFour == "" && userFour == dailyThree || posFour == "" && userFour == dailyFour || posFour == "" && userFour == dailyFive) {
-            posFour = userFour;
-            closeMatches++;
-            fourth.textContent = posFour;
-            document.getElementById("four").style.backgroundColor = "orange";
-            console.log(posFour);
-            closeMatchCheck()
-        } else if (posFive == "" && userFive == dailyTwo || posFive == "" && userFive == dailyThree || posFive == "" && userFive == dailyFour || posFive == "" && userFive == dailyFive) {
-            posFive = userFive;
-            closeMatches++;
-            fifth.textContent = posFive;
-            document.getElementById("five").style.backgroundColor = "orange";
-            console.log(posFive);
-            closeMatchCheck()
+        if (posOne == "" && closeOne == "") {
+            if (userOne == dailyTwo) {
+                dailyTwo = "";
+                closeMatchOne()
+            } else if (userOne == dailyThree) {
+                dailyThree = "";
+                closeMatchOne()
+            } else if (userOne == dailyFour) {
+                dailyFour = "";
+                closeMatchOne()
+            } else if (userOne == dailyFive) {
+                dailyFive = "";
+                closeMatchOne()
+            } else {
+                closeOne = 1;
+                closeMatchCheck()
+            }
+            function closeMatchOne() {
+                posOne = userOne;
+                closeMatches++;
+                first.textContent = posOne;
+                document.getElementById("one").style.backgroundColor = "orange";
+                console.log(posOne);
+                closeMatchCheck()
+            }
+        } else if (posTwo == "" && closeTwo == "") {
+            if (userTwo == dailyOne) {
+                dailyOne = "";
+                closeMatchTwo()
+            } else if (userTwo == dailyThree) {
+                dailyThree = "";
+                closeMatchTwo()
+            } else if (userTwo == dailyFour) {
+                dailyFour = "";
+                closeMatchTwo()
+            } else if (userTwo == dailyFive) {
+                dailyFive = "";
+                closeMatchTwo()
+            } else {
+                closeTwo = 1;
+                closeMatchCheck()
+            }
+            function closeMatchTwo() {
+                posTwo = userTwo;
+                closeMatches++;
+                second.textContent = posTwo;
+                document.getElementById("two").style.backgroundColor = "orange";
+                console.log(posTwo);
+                closeMatchCheck()
+            }
+        } else if (posThree == "" && closeThree == "") {
+            if (userThree == dailyOne) {
+                dailyOne = "";
+                closeMatchThree()
+            } else if (userThree == dailyTwo) {
+                dailyTwo = "";
+                closeMatchThree()
+            } else if (userThree == dailyFour) {
+                dailyFour = "";
+                closeMatchThree()
+            } else if (userThree == dailyFive) {
+                dailyFive = "";
+                closeMatchThree()
+            } else {
+                closeThree = 1;
+                closeMatchCheck()
+            }
+            function closeMatchThree() {
+                posThree = userThree;
+                closeMatches++;
+                third.textContent = posThree;
+                document.getElementById("three").style.backgroundColor = "orange";
+                console.log(posThree);
+                closeMatchCheck()
+            }
+        } else if (posFour == "" && closeFour == "") {
+            if (userFour == dailyOne) {
+                dailyOne= "";
+                closeMatchFour()
+            } else if (userFour == dailyTwo) {
+                dailyTwo = "";
+                closeMatchFour()
+            } else if (userFour == dailyThree) {
+                dailyThree = "";
+                closeMatchFour()
+            } else if (userFour == dailyFive) {
+                dailyFive = "";
+                closeMatchFour()
+            } else {
+                closeFour = 1;
+                closeMatchCheck()
+            }
+            function closeMatchFour() {
+                posFour = userFour;
+                closeMatches++;
+                fourth.textContent = posFour;
+                document.getElementById("four").style.backgroundColor = "orange";
+                console.log(posFour);
+                closeMatchCheck()
+            }
+        } else if (posFive == "" && closeFive == "") {
+            if (userFive == dailyOne) {
+                dailyOne = "";
+                closeMatchFive()
+            } else if (userFive == dailyTwo) {
+                dailyTwo = "";
+                closeMatchFive()
+            } else if (userFive == dailyThree) {
+                dailyThree = "";
+                closeMatchFive()
+            } else if (userFive == dailyFour) {
+                dailyFour = "";
+                closeMatchFive()
+            } else {
+                closeFive = 1;
+                closeMatchCheck()
+            }
+            function closeMatchFive() {
+                posFive = userFive;
+                closeMatches++;
+                fifth.textContent = posFive;
+                document.getElementById("five").style.backgroundColor = "orange";
+                console.log(posFive);
+                closeMatchCheck()
+            }
         } else {
+            console.log("No match check")
             noMatchCheck()
         }
     }

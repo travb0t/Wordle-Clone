@@ -3,16 +3,18 @@
 
 const button = document.querySelector("button");
 
+let guessCount = 0;
+
 function guessWord() {
 
     const userGuess = prompt("Please enter a 5 letter word:", "").toLowerCase();
     let dailyWord = "Steam".toLowerCase();
 
-    const first = document.querySelector(".firstLetter");
-    const second = document.querySelector(".secondLetter");
-    const third = document.querySelector(".thirdLetter");
-    const fourth = document.querySelector(".fourthLetter");
-    const fifth = document.querySelector(".fifthLetter");
+    let first;
+    let second;
+    let third;
+    let fourth;
+    let fifth;
 
     let userOne = userGuess.charAt(0);
     let userTwo = userGuess.charAt(1);
@@ -41,20 +43,53 @@ function guessWord() {
     let matches = 0;
     let closeMatches = 0;
 
+    let rowNum = "";
+    
+    rowSelect()
 
+    function rowSelect() {
+        if (guessCount == 1) {
+            rowNum = "rowTwo";
+            letterPosition()
+        } else if (guessCount == 2) {
+            rowNum = "rowThree";
+            letterPosition()
+        } else if (guessCount == 3) {
+            rowNum = "rowFour";
+            letterPosition()
+        } else if (guessCount == 4) {
+            rowNum = "rowFive";
+            letterPosition()
+        } else if (guessCount == 5) {
+            rowNum = "rowSix";
+            letterPosition()
+        } else {
+            rowNum = "rowOne";
+            letterPosition()
+        }
+        function letterPosition() {
+            first = document.querySelector(`.firstLetter.${rowNum}`);
+            second = document.querySelector(`.secondLetter.${rowNum}`);
+            third = document.querySelector(`.thirdLetter.${rowNum}`);
+            fourth = document.querySelector(`.fourthLetter.${rowNum}`);
+            fifth = document.querySelector(`.fifthLetter.${rowNum}`);
+            validation()
+        }
+    }
 
-    if (!/^[a-zA-Z\s]+$/.test(userGuess)) { 
-        alert("Please enter a valid word.");
-        guessWord()
-    } else if (userGuess.length < 5 || userGuess.length > 5) {
-        alert("Your word must contain 5 letters.");
-        guessWord()
-    } else if (userGuess == dailyWord) {
-        alert(`${dailyWord} is correct!`);
-        letterCheck()
-    } else {
-        alert("Lets check how many letters match...");
-        letterCheck()
+    function validation() {
+        if (!/^[a-zA-Z\s]+$/.test(userGuess)) { 
+            alert("Please enter a valid word.");
+            guessWord()
+        } else if (userGuess.length < 5 || userGuess.length > 5) {
+            alert("Your word must contain 5 letters.");
+            guessWord()
+        } else if (userGuess == dailyWord) {
+            alert(`${dailyWord} is correct!`);
+            letterCheck()
+        } else {
+            letterCheck()
+        }
     }
 
     function letterCheck() {
@@ -64,7 +99,7 @@ function guessWord() {
             dailyOne = "";
             matches++;
             first.textContent = posOne;
-            document.getElementById("one").style.backgroundColor = "lime";
+            document.getElementById(`${rowNum}-one`).style.backgroundColor = "lime";
             console.log(posOne);
             letterCheck()
         } else if (userTwo == dailyTwo && posTwo == "") {
@@ -72,7 +107,7 @@ function guessWord() {
             dailyTwo = "";
             matches++;
             second.textContent = posTwo;
-            document.getElementById("two").style.backgroundColor = "lime";
+            document.getElementById(`${rowNum}-two`).style.backgroundColor = "lime";
             console.log(posTwo);
             letterCheck()
         } else if (userThree == dailyThree && posThree == "") {
@@ -80,7 +115,7 @@ function guessWord() {
             dailyThree = "";
             matches++;
             third.textContent = posThree;
-            document.getElementById("three").style.backgroundColor = "lime";
+            document.getElementById(`${rowNum}-three`).style.backgroundColor = "lime";
             console.log(posThree);
             letterCheck()
         } else if (userFour == dailyFour && posFour == "") {
@@ -88,7 +123,7 @@ function guessWord() {
             dailyFour = "";
             matches++;
             fourth.textContent = posFour;
-            document.getElementById("four").style.backgroundColor = "lime";
+            document.getElementById(`${rowNum}-four`).style.backgroundColor = "lime";
             console.log(posFour);
             letterCheck()
         } else if (userFive == dailyFive && posFive == "") {
@@ -96,7 +131,7 @@ function guessWord() {
             dailyFive = "";
             matches++;
             fifth.textContent = posFive;
-            document.getElementById("five").style.backgroundColor = "lime";
+            document.getElementById(`${rowNum}-five`).style.backgroundColor = "lime";
             console.log(posFive);
             letterCheck()
         } else {
@@ -127,7 +162,7 @@ function guessWord() {
                 posOne = userOne;
                 closeMatches++;
                 first.textContent = posOne;
-                document.getElementById("one").style.backgroundColor = "orange";
+                document.getElementById(`${rowNum}-one`).style.backgroundColor = "orange";
                 console.log(posOne);
                 closeMatchCheck()
             }
@@ -152,7 +187,7 @@ function guessWord() {
                 posTwo = userTwo;
                 closeMatches++;
                 second.textContent = posTwo;
-                document.getElementById("two").style.backgroundColor = "orange";
+                document.getElementById(`${rowNum}-two`).style.backgroundColor = "orange";
                 console.log(posTwo);
                 closeMatchCheck()
             }
@@ -177,7 +212,7 @@ function guessWord() {
                 posThree = userThree;
                 closeMatches++;
                 third.textContent = posThree;
-                document.getElementById("three").style.backgroundColor = "orange";
+                document.getElementById(`${rowNum}-three`).style.backgroundColor = "orange";
                 console.log(posThree);
                 closeMatchCheck()
             }
@@ -202,7 +237,7 @@ function guessWord() {
                 posFour = userFour;
                 closeMatches++;
                 fourth.textContent = posFour;
-                document.getElementById("four").style.backgroundColor = "orange";
+                document.getElementById(`${rowNum}-four`).style.backgroundColor = "orange";
                 console.log(posFour);
                 closeMatchCheck()
             }
@@ -227,12 +262,11 @@ function guessWord() {
                 posFive = userFive;
                 closeMatches++;
                 fifth.textContent = posFive;
-                document.getElementById("five").style.backgroundColor = "orange";
+                document.getElementById(`${rowNum}-five`).style.backgroundColor = "orange";
                 console.log(posFive);
                 closeMatchCheck()
             }
         } else {
-            console.log("No match check")
             noMatchCheck()
         }
     }
@@ -242,34 +276,36 @@ function guessWord() {
         if (posOne == "") {
             posOne = userOne;
             first.textContent = posOne;
-            document.getElementById("one").style.backgroundColor = "lightgray";
+            // document.getElementById("one").style.backgroundColor = "lightgray";
             console.log(posOne);
             noMatchCheck()
         } else if (posTwo == "") {
             posTwo = userTwo;
             second.textContent = posTwo;
-            document.getElementById("two").style.backgroundColor = "lightgray";
+            // document.getElementById("two").style.backgroundColor = "lightgray";
             console.log(posTwo);
             noMatchCheck()
         } else if (posThree == "") {
             posThree = userThree;
             third.textContent = posThree;
-            document.getElementById("three").style.backgroundColor = "lightgray";
+            // document.getElementById("three").style.backgroundColor = "lightgray";
             console.log(posThree);
             noMatchCheck()
         } else if (posFour == "") {
             posFour = userFour;
             fourth.textContent = posFour;
-            document.getElementById("four").style.backgroundColor = "lightgray";
+            // document.getElementById("four").style.backgroundColor = "lightgray";
             console.log(posFour);
             noMatchCheck()
         } else if (posFive == "") {
             posFive = userFive;
             fifth.textContent = posFive;
-            document.getElementById("five").style.backgroundColor = "lightgray";
+            // document.getElementById("five").style.backgroundColor = "lightgray";
             console.log(posFive);
             noMatchCheck()
         } else {
+            guessCount++;
+            // alert(guessCount);
             alert(`You got ${matches} exact matches, and ${closeMatches} close matches!`);
             console.log(matches);
             console.log(closeMatches);

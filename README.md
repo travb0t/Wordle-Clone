@@ -11,6 +11,8 @@ Done:
     1. Exact matches are now green, and close matches are now orange.
 - Non matching letters that have no appearance in the dailyWord will appear correctly in their given position with no color change.
 - Each new entered guess will now correctly overwrite the previous guess.
+- Add 6 total word fields each with the same functionality as the first.
+- Enable each follow up word to be entered into the next field in line.
 
 To do:
 - Import a 5-letter wordList.

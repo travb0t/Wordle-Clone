@@ -13,8 +13,12 @@ Done:
 - Each new entered guess will now correctly overwrite the previous guess.
 - Add 6 total word fields each with the same functionality as the first.
 - Enable each follow up word to be entered into the next field in line.
-
-To do:
 - Import a 5-letter wordList.
 - Use wordList to randomly determine a dailyWord.
 - Compare userGuess to wordList to determine validity.
+- Add gameOver state to stop further inputs when correct answer is found OR when user runs out of guesses.
+
+To do:
+- Add text input fields to each letter space.
+- Replace prompt input system with text input field system.
+- Add more/clean up css styling.

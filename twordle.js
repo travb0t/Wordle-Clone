@@ -1,14 +1,17 @@
-// import data from './wordList.json';
-// console.log(data);
+import { WORDS } from './wordList.js';
 
 const button = document.querySelector("button");
 
 let guessCount = 0;
+let correct = 0;
+let gameOver = 0;
+let dailyWordSet = WORDS[Math.floor(Math.random() * WORDS.length)];
+let dailyWord = dailyWordSet.toLowerCase();
+console.log(dailyWord);
 
 function guessWord() {
 
     const userGuess = prompt("Please enter a 5 letter word:", "").toLowerCase();
-    let dailyWord = "Steam".toLowerCase();
 
     let first;
     let second;
@@ -43,10 +46,10 @@ function guessWord() {
     let matches = 0;
     let closeMatches = 0;
 
-    let rowNum = "";
+    let rowNum = "";    
     
     rowSelect()
-
+    
     function rowSelect() {
         if (guessCount == 1) {
             rowNum = "rowTwo";
@@ -81,11 +84,14 @@ function guessWord() {
         if (!/^[a-zA-Z\s]+$/.test(userGuess)) { 
             alert("Please enter a valid word.");
             guessWord()
+        } else if (!WORDS.includes(userGuess)) {
+            alert("Not a recognized word, please guess again.");
+            guessWord()
         } else if (userGuess.length < 5 || userGuess.length > 5) {
             alert("Your word must contain 5 letters.");
             guessWord()
         } else if (userGuess == dailyWord) {
-            alert(`${dailyWord} is correct!`);
+            correct = 1;
             letterCheck()
         } else {
             letterCheck()
@@ -306,6 +312,18 @@ function guessWord() {
         } else {
             guessCount++;
             // alert(guessCount);
+            wrapUp()
+        }
+    }
+
+    function wrapUp() {
+        if (correct == 1) {
+            alert(`${dailyWord} is correct! Well done!`);
+            gameOver = 1;
+        } else if (guessCount > 5) {
+            alert(`Sorry, but ${dailyWord} was the right answer.`)
+            gameOver = 1;
+        } else {
             alert(`You got ${matches} exact matches, and ${closeMatches} close matches!`);
             console.log(matches);
             console.log(closeMatches);
@@ -313,4 +331,14 @@ function guessWord() {
     }
 }
 
-button.addEventListener("click", guessWord);
+function gameStateCheck() {
+    if (gameOver == 0) {
+        guessWord()
+    } else if (gameOver == 1 && correct == 1) {
+        alert("Well played! Come back tomorrow for another word!");
+    } else {
+        alert("Try again tomorrow!");
+    }
+}
+
+button.addEventListener("click", gameStateCheck);

@@ -17,8 +17,12 @@ Done:
 - Use wordList to randomly determine a dailyWord.
 - Compare userGuess to wordList to determine validity.
 - Add gameOver state to stop further inputs when correct answer is found OR when user runs out of guesses.
+- Make index.html class/id naming more efficient.
+- Convert bulk of .js file FROM if/else logic statements TO for...loop system.
+- Add usage of arrays to use with for...loop to clean up variable saturation.
 
 To do:
 - Add text input fields to each letter space.
 - Replace prompt input system with text input field system.
 - Add more/clean up css styling.
+- Add "New Game" button OR a TIME based system to reset the game.

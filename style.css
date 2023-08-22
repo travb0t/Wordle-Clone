@@ -6,7 +6,7 @@ body {
     gap: 20px;
 }
 
-.lettersColumn {
+#lettersColumn {
     display: block;
 }
 
@@ -37,7 +37,3 @@ p {
 button {
     padding: 5px 10px;
 }
-
-/* input[type=text] {
-    
-} */

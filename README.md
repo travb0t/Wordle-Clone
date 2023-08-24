@@ -20,6 +20,11 @@ Done:
 - Make index.html class/id naming more efficient.
 - Convert bulk of .js file FROM if/else logic statements TO for...loop system.
 - Add usage of arrays to use with for...loop to clean up variable saturation.
+- Convert HTML gameBoard into a automated function.
+- Add a QWERTY button based keyboard:
+    1. Make a function to construct the keyBoard.
+    2. Make a function to correctly shade letters used in a guess. Same scheme as letter boxes, with addition of a dark gray for incorrect letters.
+- Add text field above "Guess a word!" button to display the correct word if all guesses are used and the correct answer is not guessed.
 
 To do:
 - Add text input fields to each letter space.

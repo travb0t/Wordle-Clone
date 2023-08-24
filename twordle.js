@@ -1,13 +1,17 @@
-import { WORDS } from './wordList.js';
+import { WORDS, KEYS } from './wordList.js';
 
 const button = document.querySelector("button");
 
 let guessCount = 0;
 let correct = 0;
 let gameOver = 0;
+
 let dailyWordSet = WORDS[Math.floor(Math.random() * WORDS.length)];
+
 let letterPos = ["one", "two", "three", "four", "five"];
 let rowNum = ["rowOne", "rowTwo", "rowThree", "rowFour", "rowFive", "rowSix"];
+
+let keyboardRowNum = ["first-row", "second-row", "third-row"];
 
 console.log(dailyWordSet);
 
@@ -41,6 +45,65 @@ function initGameBoard() {
     }
 }
 
+function initKeyBoard() {
+
+    let keyBoard = document.getElementById("keyBoard");
+    let keyCount = 10;
+
+    for (let i = 0; i < 3; i++) {
+
+        let keyboardRow = document.createElement("div");
+        keyboardRow.className = keyboardRowNum[i];
+
+        if (i > 0) {
+            keyCount = 9;
+        }
+
+        for (let j = 0; j < keyCount; j++) {
+
+            let k = j;
+
+            if (i == 1) {
+                k = j + 10;
+            } else if (i == 2) {
+                k = j + 19;
+            }
+
+            let btn = document.createElement("button") 
+            let currentKey = KEYS[k];
+
+            btn.className = "keyboard-button";
+            btn.innerHTML = `${currentKey}`
+
+            keyboardRow.appendChild(btn);
+
+        }
+
+        keyBoard.appendChild(keyboardRow);
+    }
+}
+
+function colorKeys(letter, color) {
+
+    for (const key of document.getElementsByClassName("keyboard-button")) {
+
+        if (key.textContent === letter) {
+
+            let defaultColor = key.style.backgroundColor;
+
+            if (defaultColor === "lime") {
+                return;
+            }
+
+            if (defaultColor === "orange" && color !== "lime") {
+                return;
+            }
+
+            key.style.backgroundColor = color;
+        }
+    }
+} 
+
 function guessWord() {
 
     const userGuess = prompt("Please enter a 5 letter word:", "").toLowerCase();
@@ -67,6 +130,7 @@ function guessWord() {
             document.querySelector(`.${currentRow}.${currentLetter}`).textContent = currentGuess[i];
 
             if (currentGuess[i] === rightAnswer[i]) {
+                colorKeys(currentGuess[i], "lime");
                 currentGuess[i] = "";
                 rightAnswer[i] = "#";
                 matches++;
@@ -81,10 +145,13 @@ function guessWord() {
 
             for (let k = 0; k < 5; k++) {
                 if (currentGuess[j] === rightAnswer[k]) {
+                    colorKeys(currentGuess[j], "orange")
                     currentGuess[j] = "";
                     rightAnswer[k] = "#";
                     closeMatches++;
                     document.getElementById(`${currentRow}-${currentLetter}`).style.backgroundColor = "orange";
+                } else {
+                    colorKeys(currentGuess[j], "darkgray")
                 }
             }
         }
@@ -100,12 +167,14 @@ function guessWord() {
     }
 
     function wrapUp() {
+
         if (correct == 1) {
             alert(`${dailyWordSet} is correct! Well done!`);
             gameOver = 1;
         } else if (guessCount > 5) {
             alert(`Sorry, but ${dailyWordSet} was the right answer.`);
             gameOver = 1;
+            document.getElementById("correctAnswer").textContent = dailyWordSet;
         } else {
             alert(`You got ${matches} exact matches, and ${closeMatches} close matches!`);
             // console.log(matches);
@@ -129,3 +198,4 @@ function gameStateCheck() {
 button.addEventListener("click", gameStateCheck);
 
 initGameBoard();
+initKeyBoard();

@@ -1,12 +1,13 @@
 import { WORDS, KEYS } from './wordList.js';
 
-const button = document.querySelector("button");
-
-let guessCount = 0;
 let correct = 0;
 let gameOver = 0;
 
+let guessCount = 0;
+let nextLetter = 0;
+
 let dailyWordSet = WORDS[Math.floor(Math.random() * WORDS.length)];
+let currentGuess = [];
 
 let letterPos = ["one", "two", "three", "four", "five"];
 let rowNum = ["rowOne", "rowTwo", "rowThree", "rowFour", "rowFive", "rowSix"];
@@ -106,8 +107,7 @@ function colorKeys(letter, color) {
 
 function guessWord() {
 
-    const userGuess = prompt("Please enter a 5 letter word:", "").toLowerCase();
-    let currentGuess = Array.from(userGuess);
+    let userGuess = currentGuess.join("");
     let rightAnswer = Array.from(dailyWordSet);
 
     let matches = 0;
@@ -124,10 +124,6 @@ function guessWord() {
 
             let currentRow = rowNum[guessCount];
             let currentLetter = letterPos[i];
-            // console.log(currentRow);
-            // console.log(currentLetter);
-
-            document.querySelector(`.${currentRow}.${currentLetter}`).textContent = currentGuess[i];
 
             if (currentGuess[i] === rightAnswer[i]) {
                 colorKeys(currentGuess[i], "lime");
@@ -168,6 +164,9 @@ function guessWord() {
 
     function wrapUp() {
 
+        currentGuess = [];
+        nextLetter = 0;
+
         if (correct == 1) {
             alert(`${dailyWordSet} is correct! Well done!`);
             gameOver = 1;
@@ -185,17 +184,68 @@ function guessWord() {
     guessCheck()
 }
 
-function gameStateCheck() {
-    if (gameOver == 0) {
-        guessWord();
-    } else if (gameOver == 1 && correct == 1) {
-        alert("Well played! Come back tomorrow for another word!");
-    } else {
-        alert("Try again tomorrow!");
+function insertLetter(pressedKey) {
+
+    if (nextLetter === 5) {
+        return;
     }
+    pressedKey = pressedKey.toLowerCase();
+
+    let currentRow = rowNum[guessCount];
+    let currentLetter = letterPos[nextLetter];
+
+    document.querySelector(`.${currentRow}.${currentLetter}`).textContent = pressedKey;
+    currentGuess.push(pressedKey);
+
+    nextLetter++;
+
 }
 
-button.addEventListener("click", gameStateCheck);
+function removeLetter() {
+
+    nextLetter -= 1;
+
+    let currentRow = rowNum[guessCount];
+    let currentLetter = letterPos[nextLetter];
+
+    document.querySelector(`.${currentRow}.${currentLetter}`).textContent = "";
+    currentGuess.pop();
+
+}
+
+document.addEventListener("keyup", (keyPress) => {
+
+    if (gameOver === 1) {
+        return;
+    }
+
+    let pressedKey = String(keyPress.key);
+
+    if (pressedKey === "Backspace" && nextLetter !== 0) {
+        removeLetter();
+        return;
+    }
+
+    if (pressedKey === "Enter") {
+        guessWord();
+        return;
+    }
+
+    let foundKey = pressedKey.match(/[a-z]/gi);
+
+    if (!foundKey || foundKey.length > 1) {
+        return;
+    } else {
+        insertLetter(pressedKey);
+    }
+
+});
+
+// document.getElementById("keyBoard").addEventListener("click", (keyClick) => {
+
+//     const target = keyClick.target;
+
+// });
 
 initGameBoard();
 initKeyBoard();

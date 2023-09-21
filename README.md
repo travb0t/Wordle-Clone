@@ -25,9 +25,9 @@ Done:
     1. Make a function to construct the keyBoard.
     2. Make a function to correctly shade letters used in a guess. Same scheme as letter boxes, with addition of a dark gray for incorrect letters.
 - Add text field above "Guess a word!" button to display the correct word if all guesses are used and the correct answer is not guessed.
-
-To do:
 - Add text input fields to each letter space.
 - Replace prompt input system with text input field system.
 - Add more/clean up css styling.
+
+To do:
 - Add "New Game" button OR a TIME based system to reset the game.

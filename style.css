@@ -12,14 +12,8 @@ body {
 #gameBoard {
     display: flex;
     flex-direction: column;
-}
-
-.buttHolder {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding-left: 40px;
+    justify-content: center;
 }
 
 #correctAnswer {
@@ -43,7 +37,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: lightgray;
-    border: solid darkgray 1.5px;
+    border: solid rgb(99, 99, 99) 1.5px;
     border-radius: 5px;
 }
 
@@ -67,8 +61,5 @@ p {
     border-style: none;
     padding: 8px 12px;
     background-color: lightgray;
-}
-
-button {
-    padding: 5px 10px;
+    border-bottom: 2px solid rgb(78, 78, 78);
 }
